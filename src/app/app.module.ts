@@ -1,19 +1,30 @@
-import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { LoginComponent } from "./login/login.component";
+import { RouterModule, Routes } from "@angular/router";
+import { FormsModule } from "@angular/forms";
+import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NgModule } from "@angular/core";
 
-import { AppComponent } from './app.component';
-import { PanelModule } from 'primeng/primeng';
+import { AppComponent } from "./app.component";
+import { PanelModule } from "primeng/primeng";
 import { ButtonModule } from "primeng/primeng";
 import { SplitButtonModule } from "primeng/primeng";
 import { InputTextModule } from "primeng/primeng";
 import { PasswordModule } from "primeng/primeng";
+import { TabMenuModule, MenubarModule } from "primeng/primeng";
+import { PatientComponent } from "./patient/patient.component";
+import { AutorizationService } from './services/autorization.service';
 
+const appRoutes: Routes = [
+  { path: "", component: PatientComponent },
+  { path: "patients", component: PatientComponent },
+  { path: "login", component: LoginComponent }
+];
 @NgModule({
   declarations: [
-    AppComponent
-  ],
+    AppComponent,
+    PatientComponent,
+    LoginComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -22,9 +33,12 @@ import { PasswordModule } from "primeng/primeng";
     ButtonModule,
     SplitButtonModule,
     InputTextModule,
-    PasswordModule
+    PasswordModule,
+    TabMenuModule,
+    MenubarModule,
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [AutorizationService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,0 +1,36 @@
+<div class="login-form">
+  <p-panel>
+    <p-header>
+      <div class="ui-helper-clearfix" style="text-align: center; font-weight: bold;">
+        <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">LOGIN</span>
+      </div>
+    </p-header>
+    <div id="content">
+      <br>
+      <span class="ui-float-label">
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" pInputText placeholder="Username" size="27">
+        </div>
+      </span>
+      <br>
+      <span class="ui-float-label">
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-unlock-alt"></i>
+
+          </span>
+          <input id="float-input" type="password" placeholder="Password" size="27" pPassword [feedback]=false>
+        </div>
+      </span>
+    </div>
+    <br>
+    <p-footer>
+      <div style="text-align: right;">
+        <button pButton type="button" icon="fa-sign-in" label="INGRESAR" class="ui-button-success" (click)="login()"></button>
+      </div>
+    </p-footer>
+  </p-panel>
+</div>

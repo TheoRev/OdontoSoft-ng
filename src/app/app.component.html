@@ -1,28 +1,6 @@
-<div class="login-form">
-  <p-panel>
-    <p-header>
-      <div class="ui-helper-clearfix" style="text-align: center; font-weight: bold;">
-        <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">LOGIN</span>
-      </div>
-    </p-header>
-    <div id="content">
-      <br>
-      <span class="ui-float-label">
-        <input id="float-input" type="text" size="30" pInputText>
-        <label for="float-input">Usuario</label>
-      </span>
-      <br>
-      <br>
-      <span class="ui-float-label">
-        <input id="float-input" type="password" size="30" pPassword [feedback]=false>
-        <label for="float-input">Password</label>
-      </span>
-    </div>
-    <br>
-    <p-footer>
-      <div style="text-align: right;">
-        <button pButton type="button" icon="fa-sign-in" label="INGRESAR" class="ui-button-success"></button>
-      </div>
-    </p-footer>
-  </p-panel>
-</div>
+<p-menubar [model]="items">
+  <input type="text" pInputText placeholder="Search">
+  <button pButton label="Logout" icon="fa-sign-out"></button>
+</p-menubar>
+
+<router-outlet></router-outlet>
