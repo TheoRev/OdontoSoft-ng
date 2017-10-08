@@ -1,5 +1,4 @@
-<p-menubar [model]="items">
-  <input type="text" pInputText placeholder="Search">
+<p-menubar [model]="items" *ngIf="isLogin">
   <button pButton label="Logout" icon="fa-sign-out"></button>
 </p-menubar>
 

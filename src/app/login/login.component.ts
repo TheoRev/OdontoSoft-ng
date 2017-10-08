@@ -8,9 +8,14 @@ import { PanelModule } from "primeng/primeng";
   styleUrls: ["./login.component.css"]
 })
 export class LoginComponent {
+  loginParams: any = {};
+  isLogin = false;
   constructor(private autorizationService: AutorizationService) {}
 
   login() {
-    this.autorizationService.login("user", "pass");
+    this.isLogin = this.autorizationService.login(
+      this.loginParams.user,
+      this.loginParams.pass
+    );
   }
 }

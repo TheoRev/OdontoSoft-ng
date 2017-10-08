@@ -12,7 +12,7 @@
           <span class="ui-inputgroup-addon">
             <i class="fa fa-user"></i>
           </span>
-          <input type="text" pInputText placeholder="Username" size="27">
+          <input type="text" pInputText placeholder="Username" size="27" [(ngModel)]="loginParams.user">
         </div>
       </span>
       <br>
@@ -20,9 +20,8 @@
         <div class="ui-inputgroup">
           <span class="ui-inputgroup-addon">
             <i class="fa fa-unlock-alt"></i>
-
           </span>
-          <input id="float-input" type="password" placeholder="Password" size="27" pPassword [feedback]=false>
+          <input id="float-input" type="password" placeholder="Password" size="27" pPassword [feedback]=false [(ngModel)]="loginParams.pass">
         </div>
       </span>
     </div>

@@ -1,0 +1,11 @@
+.content-panel {
+  margin-top: 15px;
+  margin-left: 250px;
+  width: 820px;
+}
+
+.panel{
+  background-color: #30849d;
+  align-items: center;
+  justify-content: center;
+}
