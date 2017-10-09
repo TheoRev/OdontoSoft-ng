@@ -4,8 +4,8 @@
     </p-panel> -->
         <p-dataTable [value]="cars" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
           <p-header>
-            List of {{title}}
-            <button pButton type="button" class="ui-button-info" icon="fa-plus" label="NUEVO" style="float: right; font-size: 10pt; font-weight: bold;"></button>
+            {{title}}
+            <button pButton type="button" class="ui-button-info" icon="fa-plus" label="NUEVO" style="float: right; font-size: 10pt; font-weight: bold;" (click)="doFindAllPatients()"></button>
           </p-header>
           <p-column field="vin" header="Vin"></p-column>
           <p-column field="year" header="Year"></p-column>

@@ -1,3 +1,4 @@
+import { HttpModule } from '@angular/http';
 import { LoginComponent } from "./login/login.component";
 import { RouterModule, Routes } from "@angular/router";
 import { FormsModule } from "@angular/forms";
@@ -15,6 +16,8 @@ import { TabMenuModule, MenubarModule } from "primeng/primeng";
 import { DataTableModule } from "primeng/primeng";
 import { PatientComponent } from "./patient/patient.component";
 import { AutorizationService } from "./services/autorization.service";
+import { PatientService } from "./services/patient.service";
+// import {HTTP_PROVIDERS} from "@angular/http"
 
 const appRoutes: Routes = [
   { path: "", component: LoginComponent },
@@ -39,9 +42,10 @@ const appRoutes: Routes = [
     TabMenuModule,
     MenubarModule,
     DataTableModule,
+    HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [AutorizationService],
+  providers: [AutorizationService, PatientService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
