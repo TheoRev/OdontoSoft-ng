@@ -1,0 +1,22 @@
+export interface Patient {
+  id;
+  created_at;
+  updated_at;
+  deleted_at;
+  date_init;
+  nom_ape;
+  age;
+  sex;
+  date_nac;
+  address;
+  ocupation;
+  tel_ce;
+  alergies;
+  operations;
+  diabettes;
+  hipertension;
+  others;
+  treat_medics;
+  state;
+  treatment;
+}

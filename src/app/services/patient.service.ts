@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Patient } from '../patient/patient';
+import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import "rxjs/Rx";
-import { Http, Headers } from '@angular/http';
+import 'rxjs/Rx';
+import { Http, Headers } from "@angular/http";
 
 @Injectable()
 export class PatientService {
-  constructor(private http: Http){}
+  constructor(private http: Http) {}
 
   public findAllPatients() {
     const endPoint = "http://localhost:3030/api/patients/";
@@ -16,6 +17,6 @@ export class PatientService {
     // headers.append("Access-Control-Allow-Origin", "*");
     // headers.append("Content-Type", "application/json");
 
-    return this.http.get(endPoint, { headers: headers }).map(res => res.json());
+    return this.http.get(endPoint, { headers: headers }).map(res => <Patient[]> res.json());
   }
 }

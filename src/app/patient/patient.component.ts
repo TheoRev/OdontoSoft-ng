@@ -1,9 +1,10 @@
 import { PatientService } from "../services/patient.service";
 import { FormControl } from "@angular/forms";
 import { Headers, Http, RequestOptions, Response } from "@angular/http";
-import { Component } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import { Observable } from "rxjs";
-import "rxjs/Rx";
+import 'rxjs/Rx';
+import { Patient } from "./patient";
 
 @Component({
   selector: "app-patient",
@@ -15,18 +16,23 @@ export class PatientComponent {
   result: Observable<any>;
   private searchField: FormControl;
   getData: string;
+  patients: Patient[];
 
-  constructor(private http: Http, private patientService: PatientService) {}
+  constructor(private http: Http, private patientService: PatientService) {
+    this.doFindAllPatients();
+  }
 
   doFindAllPatients() {
     this.patientService
       .findAllPatients()
       .subscribe(
-        data => (this.getData = JSON.stringify(data)),
+        data => (this.patients = data),
+        // patients => (this.Patient = patients),
         error => console.log(error),
         () => console.log("Finished")
       );
 
-    console.log(this.getData);
+    // this.patients = this.getData;;
+    console.log(this.patients);
   }
 }

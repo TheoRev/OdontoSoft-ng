@@ -13,7 +13,7 @@ import { SplitButtonModule } from "primeng/primeng";
 import { InputTextModule } from "primeng/primeng";
 import { PasswordModule } from "primeng/primeng";
 import { TabMenuModule, MenubarModule } from "primeng/primeng";
-import { DataTableModule } from "primeng/primeng";
+import { DataTableModule, SharedModule } from "primeng/primeng";
 import { PatientComponent } from "./patient/patient.component";
 import { AutorizationService } from "./services/autorization.service";
 import { PatientService } from "./services/patient.service";
@@ -42,6 +42,7 @@ const appRoutes: Routes = [
     TabMenuModule,
     MenubarModule,
     DataTableModule,
+    SharedModule,
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
