@@ -5,14 +5,21 @@
     <p-dataTable [value]="patients" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
       <p-header>
         {{title}}
-        <button pButton type="button" class="ui-button-info" icon="fa-plus" label="NUEVO" style="float: right; font-size: 10pt; font-weight: bold;"
-          (click)="doFindAllPatients()"></button>
+        <button pButton type="button" class="ui-button-info" icon="fa-plus" label="NUEVO" style="float: right; font-size: 10pt; font-weight: bold;"></button>
       </p-header>
       <p-column field="ID" header="ID"></p-column>
       <p-column field="nomApe" header="Nom. Ape."></p-column>
       <p-column field="age" header="Edad"></p-column>
-      <p-column field="sex" header="Sexo"></p-column>
-      <p-column field="dateNac" header="Fec. Nac."></p-column>
+      <p-column field="sex" header="Sexo">
+        <ng-template let-col let-sex="rowData" pTemplate="body" style="text-align: center;">
+          <span [style.color]="Red">{{sex[col.field]}}</span>
+        </ng-template>
+      </p-column>
+      <p-column field="dateNac" header="Fec. Nac.">
+        <ng-template let-col let-fec="rowData" pTemplate="body">
+          <span>{{fec[col.field] | date:'dd/MM/yyyy'}}</span>
+        </ng-template>
+      </p-column>
     </p-dataTable>
   </div>
 </div>
