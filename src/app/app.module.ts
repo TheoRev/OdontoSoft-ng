@@ -1,4 +1,4 @@
-import { HttpModule } from '@angular/http';
+import { HttpModule } from "@angular/http";
 import { LoginComponent } from "./login/login.component";
 import { RouterModule, Routes } from "@angular/router";
 import { FormsModule } from "@angular/forms";
@@ -17,6 +17,10 @@ import { DataTableModule, SharedModule } from "primeng/primeng";
 import { PatientComponent } from "./patient/patient.component";
 import { AutorizationService } from "./services/autorization.service";
 import { PatientService } from "./services/patient.service";
+import { DialogModule } from "primeng/primeng";
+import { CalendarModule } from "primeng/primeng";
+import { SpinnerModule } from "primeng/primeng";
+import { RadioButtonModule } from "primeng/primeng";
 // import {HTTP_PROVIDERS} from "@angular/http"
 
 const appRoutes: Routes = [
@@ -25,11 +29,7 @@ const appRoutes: Routes = [
   { path: "login", component: LoginComponent }
 ];
 @NgModule({
-  declarations: [
-    AppComponent,
-    PatientComponent,
-    LoginComponent
-  ],
+  declarations: [AppComponent, PatientComponent, LoginComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -44,6 +44,10 @@ const appRoutes: Routes = [
     DataTableModule,
     SharedModule,
     HttpModule,
+    DialogModule,
+    CalendarModule,
+    SpinnerModule,
+    RadioButtonModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [AutorizationService, PatientService],

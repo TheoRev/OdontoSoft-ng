@@ -2,24 +2,66 @@
   <div class="panel">
     <!-- <p-panel header="{{title}}" styleClass="panel">
     </p-panel> -->
-    <p-dataTable [value]="patients" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+    <p-dataTable [value]="patients" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" resizableColumns="true"
+      [scrollable]="false" scrollHeight="200px" [style]="{'font-size':'8'}">
       <p-header>
-        {{title}}
-        <button pButton type="button" class="ui-button-info" icon="fa-plus" label="NUEVO" style="float: right; font-size: 10pt; font-weight: bold;"></button>
+        {{title | uppercase}}
+        <button pButton type="button" class="ui-button-info" icon="fa-plus" label="NUEVO" style="float: right; font-size: 10pt; font-weight: bold;"
+          (click)="newPatient()"></button>
       </p-header>
-      <p-column field="ID" header="ID"></p-column>
-      <p-column field="nomApe" header="Nom. Ape."></p-column>
-      <p-column field="age" header="Edad"></p-column>
-      <p-column field="sex" header="Sexo">
+      <p-column field="ID" [style]="{'text-align':'center','width':'35pt'}" header="ID"></p-column>
+      <p-column field="nomApe" [filter]="true" [style]="{'font-size':'8'}" [sortable]="true" header="Nom. Ape."></p-column>
+
+      <p-column field="age" [style]="{'text-align':'center','width':'40pt'}" header="Edad"></p-column>
+      <p-column field="sex" [style]="{'text-align':'center','width':'40pt'}" header="Sexo">
         <ng-template let-col let-sex="rowData" pTemplate="body" style="text-align: center;">
-          <span [style.color]="Red">{{sex[col.field]}}</span>
+          <span [style]="Red">{{sex[col.field]}}</span>
         </ng-template>
       </p-column>
-      <p-column field="dateNac" header="Fec. Nac.">
+      <p-column field="dateNac" [sortable]="true" [style]="{'text-align':'right','width':'75pt'}" header="Fec. Nac.">
         <ng-template let-col let-fec="rowData" pTemplate="body">
           <span>{{fec[col.field] | date:'dd/MM/yyyy'}}</span>
         </ng-template>
       </p-column>
+      <p-column field="address" hidden="true" header="Dirección"></p-column>
+      <p-column field="ocupation" hidden="true" header="Ocupación"></p-column>
+      <p-column [style]="{'text-align':'center','width':'75pt'}">
+        <ng-template pTemplate="body">
+          <button pButton type="button" title="Modificar" class="ui-button-warning" icon="fa fa-pencil" (click)="modifyPatient()"></button>
+          &nbsp;
+          <button pButton type="button" title="Eliminar" class="ui-button-danger" icon="fa fa-trash"></button>
+        </ng-template>
+      </p-column>
     </p-dataTable>
   </div>
+  <p-dialog header="{{accion}} PACIENTE" [(visible)]="display" [modal]="true">
+    <span class="ui-float-label" style="margin-top: 15px;">
+      <input id="float-input" type="text" size="30" pInputText>
+      <label for="float-input">ID</label>
+    </span>
+    <span class="ui-float-label" style="margin-top: 25px;">
+      <input id="float-input" type="date" size="30" pInputText>
+      <label for="float-input">Fecha</label>
+    </span>
+    <span class="ui-float-label" style="margin-top: 25px;">
+      <input id="float-input" type="text" size="30" pInputText>
+      <label for="float-input">Nombre y Ape.</label>
+    </span>
+    <span class="ui-float-label" style="margin-top: 25px;">
+      <!-- <input id="float-input" type="text" size="30" pInputText> -->
+      <p-spinner size="30" [(ngModel)]="val" [min]="0" [max]="100"></p-spinner>
+      <label for="float-input">Edad</label>
+    </span>
+    <!-- <span class="ui-float-label" style="margin-top: 25px;"> -->
+    <!-- <input id="float-input" type="text" size="30" pInputText> -->
+    <div style="margin-top: 25px;">
+      <label for="float-input">Sexo:</label>
+      <p-radioButton name="groupname" label="Masculino" value="val1" [(ngModel)]="selectedValue"></p-radioButton>
+
+      <p-radioButton name="groupname" value="val2" label="Femenino" [(ngModel)]="selectedValue"></p-radioButton>
+
+    </div>
+    <!-- </span> -->
+
+  </p-dialog>
 </div>
