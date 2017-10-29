@@ -4,28 +4,63 @@
     </p-panel> -->
     <p-dataTable [value]="patients" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" resizableColumns="true"
       [scrollable]="false" scrollHeight="200px" [style]="{'font-size':'8'}">
-
       <p-header>
         {{title | uppercase}}
         <button pButton type="button" class="ui-button-info" icon="fa-plus" label="NUEVO" style="float: right; font-size: 10pt; font-weight: bold;"
           (click)="newPatient()"></button>
       </p-header>
-      <p-column field="ID" [style]="{'text-align':'center','width':'35pt'}" header="ID"></p-column>
-
-      <p-column field="nomApe" [filter]="true" [style]="{'font-size':'8'}" [sortable]="true" header="Nom. Ape."></p-column>
-      <p-column field="age" [style]="{'text-align':'center','width':'40pt'}" header="Edad"></p-column>
+      <p-column field="ID" [style]="{'text-align':'center','width':'35pt'}" header="ID">
+        <ng-template let-col let-row="rowData" pTemplate="body">
+          <span>{{row[col.field]}}</span>
+        </ng-template>
+      </p-column>
+      <p-column field="dateInit" [sortable]="true" [style]="{'text-align':'right','width':'85pt'}" header="Fec. Ingr.">
+        <ng-template let-col let-fec="rowData" pTemplate="body">
+          <span>{{fec[col.field] | date:'dd/MM/yyyy'}}</span>
+        </ng-template>
+      </p-column>
+      <p-column field="nomApe" [filter]="true" [style]="{'font-size':'8'}" [sortable]="true" header="Nom. Ape.">
+        <ng-template let-col let-row="rowData" pTemplate="body">
+          <span>{{row[col.field]}}</span>
+        </ng-template>
+      </p-column>
+      <p-column field="age" [style]="{'text-align':'center','width':'40pt'}" header="Edad">
+        <ng-template let-col let-row="rowData" pTemplate="body">
+          <span>{{row[col.field]}}</span>
+        </ng-template>
+      </p-column>
       <p-column field="sex" [style]="{'text-align':'center','width':'40pt'}" header="Sexo">
         <ng-template let-col let-sex="rowData" pTemplate="body" style="text-align: center;">
           <span [style]="Red">{{sex[col.field]}}</span>
         </ng-template>
       </p-column>
-      <p-column field="dateNac" [sortable]="true" [style]="{'text-align':'right','width':'75pt'}" header="Fec. Nac.">
+      <p-column field="dateNac" [sortable]="true" [style]="{'text-align':'right','width':'85pt'}" header="Fec. Nac.">
         <ng-template let-col let-fec="rowData" pTemplate="body">
           <span>{{fec[col.field] | date:'dd/MM/yyyy'}}</span>
         </ng-template>
       </p-column>
       <p-column field="address" hidden="true" header="Dirección"></p-column>
       <p-column field="ocupation" hidden="true" header="Ocupación"></p-column>
+      <p-column field="diabettes" header="Diats." title="Diabettes" [style]="{'text-align':'center','width':'45pt'}">
+        <ng-template let-col let-row="rowData" pTemplate="body">
+          <div *ngIf="row[col.field]">
+            <i class="fa fa-check" aria-hidden="true"></i>
+          </div>
+          <div *ngIf="!row[col.field]">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </div>
+        </ng-template>
+      </p-column>
+      <p-column field="hipertension" header="Hiper." [style]="{'text-align':'center','width':'45pt'}">
+        <ng-template let-col let-row="rowData" pTemplate="body">
+          <div *ngIf="row[col.field]">
+            <i class="fa fa-check" aria-hidden="true" #thenBlock></i>
+          </div>
+          <div *ngIf="!row[col.field]">
+            <i class="fa fa-times" aria-hidden="true" #elseBlock></i>
+          </div>
+        </ng-template>
+      </p-column>
       <p-column [style]="{'text-align':'center','width':'75pt'}">
         <ng-template pTemplate="body">
           <button pButton type="button" title="Modificar" class="ui-button-warning" icon="fa fa-pencil" (click)="modifyPatient()"></button>
@@ -35,63 +70,83 @@
       </p-column>
     </p-dataTable>
   </div>
-
-  <!-- FORM PACIENTE -->
-  <p-dialog header="{{accion}} PACIENTE" [(visible)]="display" [modal]="true" [width]="600">
-    <div class="ui-g">
-      <div class="ui-g-4">
-        <span class="ui-float-label" style="margin-top: 15px;">
-          <input id="float-input" type="text" size="30" pInputText disabled="true">
-          <label for="float-input">ID</label>
-        </span>
-        <span class="ui-float-label" style="margin-top: 25px;">
-          <!-- <input id="float-input" type="date" size="30" pInputText> -->
-          <p-calendar [locale]="es" showButtonBar="true" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="1890:2500"
-            dateFormat="dd/mm/yy"></p-calendar>
-          <label for="float-input">Fecha</label>
-        </span>
-        <span class="ui-float-label" style="margin-top: 25px;">
-          <input id="float-input" type="text" size="30" pInputText>
-          <label for="float-input">Nombre y Ape.</label>
-        </span>
-        <span class="ui-float-label" style="margin-top: 25px;">
-          <!-- <input id="float-input" type="text" size="30" pInputText> -->
-          <p-spinner size="30" [(ngModel)]="val" [min]="0" [max]="100"></p-spinner>
-          <label for="float-input">Edad</label>
-        </span>
-        <!-- <span class="ui-float-label" style="margin-top: 25px;"> -->
-        <!-- <input id="float-input" type="text" size="30" pInputText> -->
-        <div style="margin-top: 25px;">
-          <span>
-            <label for="float-input">Sexo:</label>
-            <p-radioButton name="groupname" label="Masculino" value="val1" [(ngModel)]="selectedValue"></p-radioButton>
-            <p-radioButton name="groupname" value="val2" label="Femenino" [(ngModel)]="selectedValue"></p-radioButton>
-          </span>
-        </div>
-        <span class="ui-float-label" style="margin-top: 25px;">
-          <!-- <input id="float-input" type="date" size="30" pInputText> -->
-          <p-calendar [locale]="es" showButtonBar="true" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="1890:2500"
-            dateFormat="dd/mm/yy"></p-calendar>
-          <label for="float-input">Fec. Nacimiento</label>
-        </span>
-        <span class="ui-float-label" style="margin-top: 25px;">
-          <input id="float-input" type="text" size="30" pInputText>
-          <label for="float-input">Dirección</label>
-        </span>
-        <span class="ui-float-label" style="margin-top: 25px;">
-          <input id="float-input" type="text" size="30" pInputText>
-          <label for="float-input">Ocupación</label>
-        </span>
-
-      </div>
-      <div class="ui-g-4">
-
-      </div>
-    </div>
-
-
-
-    <!-- </span> -->
-
-  </p-dialog>
 </div>
+
+
+<!-- FORM PACIENTE -->
+<p-dialog header="{{accion}} PACIENTE" [(visible)]="display" [modal]="true" [width]="600">
+  <div class="ui-g">
+    <div class="ui-g-6">
+      <span class="ui-float-label" style="margin-top: 15px;">
+        <input id="float-input" type="text" size="40" pInputText disabled="true">
+        <label for="float-input">ID</label>
+      </span>
+      <span class="ui-float-label" style="margin-top: 25px;">
+        <!-- <input id="float-input" type="date" size="30" pInputText> -->
+        <p-calendar [locale]="es" showButtonBar="true" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="1890:2500"
+          dateFormat="dd/mm/yy" size="40"></p-calendar>
+        <label for="float-input">Fecha</label>
+      </span>
+      <span class="ui-float-label" style="margin-top: 25px;">
+        <input id="float-input" type="text" size="40" pInputText>
+        <label for="float-input">Nombre y Ape.</label>
+      </span>
+      <span class="ui-float-label" style="margin-top: 25px;">
+        <!-- <input id="float-input" type="text" size="30" pInputText> -->
+        <p-spinner size="30" [(ngModel)]="val" [min]="0" [max]="100" size="40"></p-spinner>
+        <label for="float-input">Edad</label>
+      </span>
+      <!-- <span class="ui-float-label" style="margin-top: 25px;"> -->
+      <!-- <input id="float-input" type="text" size="30" pInputText> -->
+      <div style="margin-top: 25px;">
+        <span>
+          <label for="float-input">Sexo:</label>
+          <p-radioButton name="groupname" label="Masculino" value="val1" [(ngModel)]="selectedValue"></p-radioButton>
+          <p-radioButton name="groupname" value="val2" label="Femenino" [(ngModel)]="selectedValue"></p-radioButton>
+        </span>
+      </div>
+      <span class="ui-float-label" style="margin-top: 25px;">
+        <!-- <input id="float-input" type="date" size="30" pInputText> -->
+        <p-calendar [locale]="es" showButtonBar="true" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="1890:2500"
+          dateFormat="dd/mm/yy"></p-calendar>
+        <label for="float-input">Fec. Nacimiento</label>
+      </span>
+      <span class="ui-float-label" style="margin-top: 25px; width: 100%;">
+        <input id="float-input" type="text" size="40" pInputText>
+        <label for="float-input">Dirección</label>
+      </span>
+      <span class="ui-float-label" style="margin-top: 25px;">
+        <input id="float-input" type="text" size="40" pInputText>
+        <label for="float-input">Ocupación</label>
+      </span>
+    </div>
+    <div class="ui-g-6">
+      <span class="ui-float-label" style="margin-top: 25px;">
+        <input id="float-input" type="text" size="40" pInputText>
+        <label for="float-input">Telef. / Cel.</label>
+      </span>
+      <span class="ui-float-label" style="margin-top: 25px;">
+        <input id="float-input" type="text" size="40" pInputText>
+        <label for="float-input">Alergias</label>
+      </span>
+      <span class="ui-float-label" style="margin-top: 25px;">
+        <input id="float-input" type="text" size="40" pInputText>
+        <label for="float-input">Operaciones</label>
+      </span>
+      <div style="margin-top: 25px;">
+        <span>
+          <label for="float-input">Diabettes: </label>&nbsp;
+          <p-inputSwitch onLabel="SI" offLabel="NO"></p-inputSwitch>
+        </span>
+      </div>
+      <div style="margin-top: 25px;">
+        <span>
+          <label for="float-input">Hipertensión: </label>&nbsp;
+          <p-inputSwitch onLabel="SI" offLabel="NO" [(ngModel)]="checked"></p-inputSwitch>
+        </span>
+      </div>
+      <span class="ui-float-label" style="margin-top: 25px;">
+      </span>
+    </div>
+  </div>
+</p-dialog>

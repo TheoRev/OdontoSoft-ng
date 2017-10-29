@@ -1,3 +1,4 @@
+import { InputSwitchModule } from 'primeng/primeng';
 import { HttpModule } from "@angular/http";
 import { LoginComponent } from "./login/login.component";
 import { RouterModule, Routes } from "@angular/router";
@@ -48,6 +49,7 @@ const appRoutes: Routes = [
     CalendarModule,
     SpinnerModule,
     RadioButtonModule,
+    InputSwitchModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [AutorizationService, PatientService],
