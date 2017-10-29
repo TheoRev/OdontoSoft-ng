@@ -20,6 +20,47 @@ export class PatientComponent {
   display: boolean = false;
   accion: string;
 
+  es: any;
+
+  ngOnInit() {
+    this.es = {
+      firstDayOfWeek: 0,
+      dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado"],
+      dayNamesShort: ["Dom", "Lun", "Mar", "Mier", "Jue", "Vie", "Sav"],
+      dayNamesMin: ["D", "L", "M", "X", "J", "V", "S"],
+      monthNames: [
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Augosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Deciembre"
+      ],
+      monthNamesShort: [
+        "Ene",
+        "Feb",
+        "Mar",
+        "Abr",
+        "May",
+        "Jun",
+        "Jul",
+        "Ago",
+        "Set",
+        "Oct",
+        "Nov",
+        "Dic"
+      ],
+      today: "Hoy",
+      clear: "Limpiar"
+    };
+  }
+
   constructor(private http: Http, private patientService: PatientService) {
     this.doFindAllPatients();
   }
