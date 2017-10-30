@@ -8,15 +8,25 @@ import { Http, Headers } from "@angular/http";
 export class PatientService {
   constructor(private http: Http) {}
 
+  extractData:any;
+  handleErrorObservable:any;
+
   public findAllPatients() {
     const endPoint = "http://localhost:3030/api/patients/";
 
     const headers = new Headers();
     // headers.append("Access-Control-Allow-Headers", "Content-Type");
-    // headers.append("Access-Control-Allow-Methods", "GET");
-    // headers.append("Access-Control-Allow-Origin", "*");
-    // headers.append("Content-Type", "application/json");
-
+    
     return this.http.get(endPoint, { headers: headers }).map(res => <Patient[]> res.json());
+  }
+  
+  public createPatient(paciente){
+    const endPoint = "http://localhost:3030/api/crud/patients/";
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    // let options = new RequestOptions({ headers: headers });
+
+    return this.http.post(endPoint, paciente, headers)
+                .map(this.extractData)
+               .catch(this.handleErrorObservable);
   }
 }

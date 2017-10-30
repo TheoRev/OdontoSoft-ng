@@ -22,7 +22,8 @@ import { DialogModule } from "primeng/primeng";
 import { CalendarModule } from "primeng/primeng";
 import { SpinnerModule } from "primeng/primeng";
 import { RadioButtonModule } from "primeng/primeng";
-// import {HTTP_PROVIDERS} from "@angular/http"
+import { FieldsetModule } from 'primeng/primeng';
+import { InputTextareaModule } from 'primeng/primeng';
 
 const appRoutes: Routes = [
   { path: "", component: LoginComponent },
@@ -50,6 +51,8 @@ const appRoutes: Routes = [
     SpinnerModule,
     RadioButtonModule,
     InputSwitchModule,
+    FieldsetModule,
+    InputTextareaModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [AutorizationService, PatientService],

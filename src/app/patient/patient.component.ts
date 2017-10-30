@@ -16,6 +16,24 @@ export class PatientComponent {
   result: Observable<any>;
   private searchField: FormControl;
   getData: string;
+  paciente: Paciente;
+  patient = {
+    ID: 0,
+    dateInit: new Date(),
+    nomApe: "",
+    age: 1,
+    sex: "",
+    dateNac: "",
+    address: "",
+    ocupation: "",
+    telCel: "",
+    alergies: "",
+    operations: "",
+    diabettes: false,
+    hipertension: true,
+    others: "",
+    treatMedics: ""
+  };
   patients: Patient[];
   display: boolean = false;
   accion: string;
@@ -63,6 +81,8 @@ export class PatientComponent {
 
   constructor(private http: Http, private patientService: PatientService) {
     this.doFindAllPatients();
+    // this.patient.others = "";
+    console.log(this.paciente);
   }
 
   newPatient() {
@@ -73,6 +93,11 @@ export class PatientComponent {
   modifyPatient() {
     this.display = true;
     this.accion = "MODIFICAR";
+  }
+
+  execute(){
+    // console.log("Paciente: " + this.patient.dateInit);
+    this.patientService.createPatient(this.patient);
   }
 
   doFindAllPatients() {
@@ -86,4 +111,27 @@ export class PatientComponent {
     // this.patients = this.getData;;
     console.log(this.patients);
   }
+}
+
+interface Paciente {
+  id: number;
+  created_at: Date;
+  updated_at: Date;
+  deleted_at: Date;
+  date_init: Date;
+  nom_ape: string;
+  age: number;
+  sex: string;
+  date_nac: Date;
+  address: string;
+  ocupation: string;
+  tel_ce: string;
+  alergies: string;
+  operations: string;
+  diabettes: boolean;
+  hipertension: boolean;
+  others: string;
+  treat_medics: string;
+  state: boolean;
+  treatment: number;
 }
